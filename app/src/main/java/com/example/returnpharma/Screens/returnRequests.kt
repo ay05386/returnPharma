@@ -18,6 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.returnpharma.Routes
+import com.example.returnpharma.Routes.CREATE_RETURN_REQUEST
 
 data class ReturnRequest(
     val id: String,
@@ -45,7 +47,7 @@ fun ReturnRequestsScreen(navController: NavController) {
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { navController.navigate("createReturnRequest") }
+                onClick = { navController.navigate("CreateReturnRequestScreen") }
             ) {
                 Text("Create Return Request")
             }
