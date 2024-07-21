@@ -1,6 +1,6 @@
 package com.example.returnpharma.networkModule
 
-
+/*
 object SessionManager {
     private var token: String? = null
 
@@ -14,5 +14,16 @@ object SessionManager {
 
     fun clearToken() {
         token = null
+    }
+}*/
+object SessionManager {
+    private var token: String? = null
+
+    fun setToken(newToken: String) {
+        token = newToken
+    }
+
+    fun getToken(): String? {
+        return token ?: ""
     }
 }

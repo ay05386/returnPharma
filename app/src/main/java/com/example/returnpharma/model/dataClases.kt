@@ -14,7 +14,7 @@ data class PharmacyDetails(
     val id: String,
     val name: String,
     val address: String,
-    // Add other fields if needed
+
 )
 
 data class Wholesaler(

@@ -1,5 +1,7 @@
 package com.example.returnpharma.remote
 
+import com.google.gson.annotations.SerializedName
+
 /*
 data class LoginResponse(
     val accessToken: String,
@@ -12,5 +14,6 @@ data class LoginResponse(
 
 
 data class LoginResponse(
+    @SerializedName("token")
     val accessToken: String
 )
