@@ -27,7 +27,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.returnpharma.Routes.ADD_ITEM
+import com.example.returnpharma.Routes.CREATE_RETURN_REQUEST
 import com.example.returnpharma.Routes.RETURN_REQUESTS
+import com.example.returnpharma.Screens.AddItemScreen
 import com.example.returnpharma.Screens.CreateReturnRequestScreen
 import com.example.returnpharma.Screens.ReturnRequestsScreen
 
@@ -43,10 +46,14 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     NavHost(navController, startDestination = "login") {
                         composable("login") { LoginScreen(navController) }
-                        composable("returnRequests") { ReturnRequestsScreen(navController)
+                        composable(RETURN_REQUESTS) { ReturnRequestsScreen(navController)
                         }
-                        composable("CreateReturnRequestScreen") { CreateReturnRequestScreen(navController)
+                        composable(CREATE_RETURN_REQUEST) { CreateReturnRequestScreen(navController)
                         }
+                        composable(ADD_ITEM) { AddItemScreen(navController)
+                        }
+
+
 
 
 

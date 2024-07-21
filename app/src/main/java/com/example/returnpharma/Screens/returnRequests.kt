@@ -47,7 +47,7 @@ fun ReturnRequestsScreen(navController: NavController) {
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { navController.navigate("CreateReturnRequestScreen") }
+                onClick = { navController.navigate(CREATE_RETURN_REQUEST) }
             ) {
                 Text("Create Return Request")
             }
