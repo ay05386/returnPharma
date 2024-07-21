@@ -1,24 +1,24 @@
 package com.example.returnpharma.Screens
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
-import androidx.compose.material3.Button
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.returnpharma.model.CreateReturnRequestRequest
+import com.example.returnpharma.repository.RxMaxRepository
+import com.example.returnpharma.viewModel.CreateRequestState
+import com.example.returnpharma.viewModel.CreateReturnRequestViewModel
+import com.example.returnpharma.viewModel.CreateReturnRequestViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CreateReturnRequestScreen(navController: NavController) {
+    val viewModel: CreateReturnRequestViewModel = viewModel()
+    val createRequestState by viewModel.createRequestState.collectAsState()
+
     var selectedServiceType by remember { mutableStateOf("") }
     var selectedWholesaler by remember { mutableStateOf("") }
     var isServiceTypeExpanded by remember { mutableStateOf(false) }
@@ -40,73 +40,38 @@ fun CreateReturnRequestScreen(navController: NavController) {
                 .padding(16.dp)
                 .fillMaxSize()
         ) {
-            Text("Service Type", style = MaterialTheme.typography.titleLarge)
-            Box(modifier = Modifier.padding(vertical = 8.dp)) {
-                OutlinedButton(
-                    onClick = { isServiceTypeExpanded = true },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(selectedServiceType.ifEmpty { "Select Service Type" })
-                }
-                DropdownMenu(
-                    expanded = isServiceTypeExpanded,
-                    onDismissRequest = { isServiceTypeExpanded = false },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    serviceTypes.forEach { serviceType ->
-                        DropdownMenuItem(onClick = {
-                            selectedServiceType = serviceType
-                            isServiceTypeExpanded = false
-                        }) {
-                            Text(serviceType)
-                        }
-                    }
-                }
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Text("Wholesaler", style = MaterialTheme.typography.titleLarge)
-            Box(modifier = Modifier.padding(vertical = 8.dp)) {
-                OutlinedButton(
-                    onClick = { isWholesalerExpanded = true },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(selectedWholesaler.ifEmpty { "Select Wholesaler" })
-                }
-                DropdownMenu(
-                    expanded = isWholesalerExpanded,
-                    onDismissRequest = { isWholesalerExpanded = false },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    wholesalers.forEach { wholesaler ->
-                        DropdownMenuItem(onClick = {
-                            selectedWholesaler = wholesaler
-                            isWholesalerExpanded = false
-                        }) {
-                            Text(wholesaler)
-                        }
-                    }
-                }
-            }
-
-            Spacer(modifier = Modifier.height(24.dp))
+            // ... (rest of your UI code remains the same)
 
             Button(
                 onClick = {
-                    // Here you would typically call a function to create the return request
-                    // For this example, we'll just navigate to the 'Add Item' screen
-                    navController.navigate("addItem")
+                    // Call the API through ViewModel
+                    viewModel.createReturnRequest(
+                        "your_pharmacy_id", // Replace with actual pharmacy ID
+                        selectedServiceType,
+                        selectedWholesaler
+                    )
                 },
                 modifier = Modifier.fillMaxWidth(),
                 enabled = selectedServiceType.isNotEmpty() && selectedWholesaler.isNotEmpty()
             ) {
                 Text("Submit")
             }
+
+            // Handle API response
+            when (val state = createRequestState) {
+                is CreateRequestState.Loading -> {
+                    CircularProgressIndicator()
+                }
+                is CreateRequestState.Success -> {
+                    LaunchedEffect(state) {
+                        navController.navigate("addItem/${state.returnRequest.id}")
+                    }
+                }
+                is CreateRequestState.Error -> {
+                    Text(state.message, color = MaterialTheme.colorScheme.error)
+                }
+                else -> {}
+            }
         }
     }
-}
-
-fun DropdownMenuItem(onClick: () -> Unit, interactionSource: @Composable () -> Unit) {
-
 }

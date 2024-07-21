@@ -41,40 +41,19 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.collectAsState
 import kotlinx.coroutines.launch
 import androidx.lifecycle.lifecycleScope
+import com.example.returnpharma.networkModule.RetrofitClient
+import com.example.returnpharma.repository.RxMaxRepository
+import com.example.returnpharma.viewModel.CreateReturnRequestViewModel
+import com.example.returnpharma.viewModel.CreateReturnRequestViewModelFactory
 import com.example.returnpharma.viewModel.LoginState
 import com.example.returnpharma.viewModel.LoginViewModel
-/*
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            ReturnPharmaTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                ) {
-                    val navController = rememberNavController()
-                    NavHost(navController, startDestination = "login") {
-                        composable("login") { LoginScreen(navController) }
-                        composable(RETURN_REQUESTS) { ReturnRequestsScreen(navController)
-                        }
-                        composable(CREATE_RETURN_REQUEST) { CreateReturnRequestScreen(navController)
-                        }
-                        composable(ADD_ITEM) { AddItemScreen(navController)
-                        }
 
-
-
-
-
-                    }
-                }
-            }
-        }
-    }
-}*/
 class MainActivity : ComponentActivity() {
     private lateinit var viewModel: LoginViewModel
+    val api = RetrofitClient.instance
+   // val repository = RxMaxRepository(api)
+  //  val requestViewModel: CreateReturnRequestViewModel = viewModel(factory = CreateReturnRequestViewModelFactory(repository))
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -184,61 +163,3 @@ fun LoginScreen(navController: NavHostController) {
         }
     }
 }
-
-/*
-
-    @Composable
-    fun LoginScreen(navController: NavHostController) {
-        var username by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = "Login",
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            OutlinedTextField(
-                value = username,
-                onValueChange = { username = it },
-                label = { Text("Username") },
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            OutlinedTextField(
-                value = password,
-                onValueChange = { password = it },
-                label = { Text("Password") },
-                visualTransformation = PasswordVisualTransformation(),
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Button(
-                onClick = {
-
-/*
-                    if (username.isNotEmpty() && password.isNotEmpty()) {
-                        // In a real app, you would make an API call here
-                        // and get the token from the response
-                        val dummyResponse = LoginResponse("dummyAccessToken")
-                        SessionManager.setToken(dummyResponse.accessToken)
-                    }
-                    navController.navigate(RETURN_REQUESTS)*/ },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Log In")
-            }
-        }
-    }
-}*/

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.returnpharma.networkModule.SessionManager
 import com.example.returnpharma.remote.LoginResponse
+import com.example.returnpharma.remote.RxMaxApi
 import com.example.returnpharma.repository.RxMaxRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
