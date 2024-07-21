@@ -20,7 +20,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.returnpharma.Routes
 import com.example.returnpharma.Routes.CREATE_RETURN_REQUEST
+import com.example.returnpharma.model.ReturnRequest
 
+/*
 data class ReturnRequest(
     val id: String,
     val createdAt: String,
@@ -29,7 +31,7 @@ data class ReturnRequest(
     val serviceType: String,
     val associatedWholesaler: String
 )
-
+*/
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReturnRequestsScreen(navController: NavController) {

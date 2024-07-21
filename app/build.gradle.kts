@@ -74,6 +74,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
     implementation("com.google.dagger:hilt-android:2.48")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.10.0")
+
 
 
     val nav_version = "2.7.7"
@@ -94,6 +96,7 @@ dependencies {
 
     // Jetpack Compose Integration
     implementation("androidx.navigation:navigation-compose:$nav_version")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
 
 
 

@@ -24,7 +24,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.returnpharma.model.Item
 
+/*
 data class Item(
     val id: String,
     val ndc: String,
@@ -35,7 +37,7 @@ data class Item(
     val expirationDate: String,
     val lotNumber: String
 )
-
+*/
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ItemsScreen(navController: NavController, returnRequestId: String) {
