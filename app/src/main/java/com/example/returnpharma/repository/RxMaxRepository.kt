@@ -13,10 +13,10 @@ class RxMaxRepository {
             if (response.isSuccessful) {
                 Result.success(response.body()!!)
             } else {
-                Result.failure(Exception("Login failed"))
+                Result.failure(Exception("Login failed: ${response.code()} ${response.message()}"))
             }
         } catch (e: Exception) {
-            Result.failure(e)
+            Result.failure(Exception("Login failed: ${e.message}"))
         }
     }
 }
