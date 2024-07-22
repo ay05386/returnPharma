@@ -1,5 +1,3 @@
-## Project Overview
-This mobile application is a solution for the Yomicepa Mobile Coding Challenge 2024. It allows pharmacy owners to manage return requests for outdated items using the provided RxMax API.
 
 ## Features
 - User authentication
@@ -28,7 +26,7 @@ This mobile application is a solution for the Yomicepa Mobile Coding Challenge 2
 ## API Configuration
 The app uses the RxMax API. The base URL is already configured, but you may need to update it in the `ApiClient.kt` file if it changes:
 
-```kotlin
+kotlin
 private const val BASE_URL = "https://portal-test.rxmaxreturns.com/rxmax/"
 
 
