@@ -2,10 +2,12 @@ package com.example.returnpharma.repository
 
 import com.example.returnpharma.model.CreateReturnRequestRequest
 import com.example.returnpharma.model.LoginRequest
+import com.example.returnpharma.model.Pharmacy
 import com.example.returnpharma.model.ReturnRequest
 import com.example.returnpharma.networkModule.RetrofitClient
 import com.example.returnpharma.remote.LoginResponse
 import com.example.returnpharma.remote.RxMaxApi
+import retrofit2.Response
 
 class RxMaxRepository (){
     private val api = RetrofitClient.instance
@@ -23,6 +25,17 @@ class RxMaxRepository (){
         }
     }
 
+/*
+    suspend fun createReturnRequest(request: CreateReturnRequestRequest): Response<ReturnRequest> {
+        return api.createReturnRequest(request)
+    }
+*/
+    suspend fun listPharmacies(): Response<List<Pharmacy>> {
+        return api.listPharmacies()
+    }
+
+
+
     suspend fun createReturnRequest(pharmacyId: String, request: CreateReturnRequestRequest): Result<ReturnRequest> {
         return try {
             val response = api.createReturnRequest(pharmacyId, request)
@@ -35,6 +48,5 @@ class RxMaxRepository (){
             Result.failure(e)
         }
     }
-
 
 }
