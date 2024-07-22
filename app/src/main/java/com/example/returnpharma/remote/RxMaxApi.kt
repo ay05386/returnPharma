@@ -41,9 +41,16 @@ interface RxMaxApi {
         @Path("pharmacyId") pharmacyId: String,
         @Path("returnRequestId") returnRequestId: String
     ): Response<ReturnRequest>
-
+/*
     @GET("pharmacies/{pharmacyId}/returnrequests")
     suspend fun listReturnRequests(@Path("pharmacyId") pharmacyId: String): Response<List<ReturnRequest>>
+*/
+
+
+    @GET("pharmacies/{pharmacyId}/returnrequests")
+    suspend fun listReturnRequests(
+        @Path("pharmacyId") pharmacyId: String
+    ): Response<List<ReturnRequest>>
 
     @POST("pharmacies/{pharmacyId}/returnrequests/{returnRequestId}/items")
     suspend fun addItem(

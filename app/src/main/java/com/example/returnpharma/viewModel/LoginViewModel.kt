@@ -15,18 +15,6 @@ class LoginViewModel : ViewModel() {
 
     private val _loginState = MutableStateFlow<LoginState>(LoginState.Idle)
     val loginState: StateFlow<LoginState> = _loginState
-/*
-    fun login(username: String, password: String) {
-        viewModelScope.launch {
-            _loginState.value = LoginState.Loading
-            val result = repository.login(username, password)
-            _loginState.value = when {
-                result.isSuccess -> LoginState.Success(result.getOrNull()!!)
-                else -> LoginState.Error(result.exceptionOrNull()?.message ?: "Unknown error")
-            }
-        }
-    }*/
-
 
 
 fun login(username: String, password: String) {

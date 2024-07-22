@@ -80,7 +80,6 @@ fun CreateReturnRequestScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Service Type Dropdown
             ExposedDropdownMenuBox(
                 expanded = isServiceTypeExpanded,
                 onExpandedChange = { isServiceTypeExpanded = it }
@@ -111,7 +110,6 @@ fun CreateReturnRequestScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Wholesaler Dropdown
             ExposedDropdownMenuBox(
                 expanded = isWholesalerExpanded,
                 onExpandedChange = { isWholesalerExpanded = it }
@@ -162,7 +160,6 @@ fun CreateReturnRequestScreen(navController: NavController) {
                 Text("Submit")
             }
 
-            // Handle API response
             when (val state = createRequestState) {
                 is CreateRequestState.Loading -> {
                     CircularProgressIndicator()

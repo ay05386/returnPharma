@@ -43,18 +43,13 @@ import kotlinx.coroutines.launch
 import androidx.lifecycle.lifecycleScope
 import com.example.returnpharma.Screens.ItemsScreen
 import com.example.returnpharma.networkModule.RetrofitClient
-import com.example.returnpharma.repository.RxMaxRepository
-import com.example.returnpharma.viewModel.CreateReturnRequestViewModel
-import com.example.returnpharma.viewModel.CreateReturnRequestViewModelFactory
+
 import com.example.returnpharma.viewModel.LoginState
 import com.example.returnpharma.viewModel.LoginViewModel
 
 class MainActivity : ComponentActivity() {
     private lateinit var viewModel: LoginViewModel
     val api = RetrofitClient.instance
-   // val repository = RxMaxRepository(api)
-  //  val requestViewModel: CreateReturnRequestViewModel = viewModel(factory = CreateReturnRequestViewModelFactory(repository))
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,10 +78,10 @@ class MainActivity : ComponentActivity() {
             viewModel.loginState.collect { state ->
                 when (state) {
                     is LoginState.Success -> {
-                        // Handle successful login if needed
+
                     }
                     is LoginState.Error -> {
-                        // Handle login error if needed
+
                     }
                     else -> {}
                 }

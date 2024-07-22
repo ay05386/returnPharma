@@ -107,8 +107,6 @@ fun AddItemScreen(navController: NavController) {
 
             Button(
                 onClick = {
-                    // Here you would typically call a function to add the item
-                    // For this example, we'll just show a success message and clear the form
                     showSuccessMessage = true
                     ndc = ""
                     description = ""
