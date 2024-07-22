@@ -1,5 +1,6 @@
 package com.example.returnpharma.viewModel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -12,13 +13,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 
-
 class CreateReturnRequestViewModel(private val repository: RxMaxRepository) : ViewModel() {
     private val _createRequestState = MutableStateFlow<CreateRequestState>(CreateRequestState.Idle)
     val createRequestState: StateFlow<CreateRequestState> = _createRequestState
 
     private val _pharmacies = MutableStateFlow<List<Pharmacy>>(emptyList())
     val pharmacies: StateFlow<List<Pharmacy>> = _pharmacies
+
 
     fun createReturnRequest(pharmacyId: String, serviceType: String, wholesalerId: String) {
         viewModelScope.launch {
@@ -45,14 +46,16 @@ class CreateReturnRequestViewModel(private val repository: RxMaxRepository) : Vi
             try {
                 val response = repository.listPharmacies()
                 if (response.isSuccessful) {
-                    response.body()?.let { pharmacyList ->
-                        _pharmacies.value = pharmacyList
-                    }
+                    val pharmacies = response.body() ?: emptyList()
+                    Log.d("CreateReturnRequestViewModel", "Fetched ${pharmacies.size} pharmacies")
+                    _pharmacies.value = pharmacies
                 } else {
-                    // Handle error
+                    Log.e("CreateReturnRequestViewModel", "Error fetching pharmacies: ${response.code()}")
+                    _pharmacies.value = emptyList()
                 }
             } catch (e: Exception) {
-                // Handle exception
+                Log.e("CreateReturnRequestViewModel", "Exception fetching pharmacies", e)
+                _pharmacies.value = emptyList()
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.example.returnpharma.Screens
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -7,13 +8,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.returnpharma.model.CreateReturnRequestRequest
-import com.example.returnpharma.repository.RxMaxRepository
 import com.example.returnpharma.viewModel.CreateRequestState
 import com.example.returnpharma.viewModel.CreateReturnRequestViewModel
 import com.example.returnpharma.viewModel.CreateReturnRequestViewModelFactory
 import com.example.returnpharma.model.Pharmacy
-import com.example.returnpharma.networkModule.RetrofitClient
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -57,7 +55,7 @@ fun CreateReturnRequestScreen(navController: NavController) {
                 onExpandedChange = { isPharmacyExpanded = it }
             ) {
                 TextField(
-                    value = selectedPharmacy?.name ?: "",
+                    value = selectedPharmacy?.doingBusinessAs ?: "",
                     onValueChange = {},
                     readOnly = true,
                     label = { Text("Select Pharmacy") },
@@ -70,7 +68,7 @@ fun CreateReturnRequestScreen(navController: NavController) {
                 ) {
                     pharmaciesState.forEach { pharmacy ->
                         DropdownMenuItem(
-                            text = { Text(pharmacy.name) },
+                            text = { pharmacy.doingBusinessAs?.let { Text(it) } },
                             onClick = {
                                 selectedPharmacy = pharmacy
                                 isPharmacyExpanded = false
@@ -147,11 +145,15 @@ fun CreateReturnRequestScreen(navController: NavController) {
             Button(
                 onClick = {
                     selectedPharmacy?.let { pharmacy ->
-                        viewModel.createReturnRequest(
-                            pharmacy.id,  // Add this line to pass the pharmacyId
-                            selectedServiceType,
-                            selectedWholesaler
-                        )
+                        if (pharmacy.pharmacyId != null) {
+                            viewModel.createReturnRequest(
+                                pharmacy.pharmacyId,
+                                selectedServiceType,
+                                selectedWholesaler
+                            )
+                        } else {
+                            Log.e("CreateReturnRequestScreen", "Selected pharmacy ID is null")
+                        }
                     }
                 },
                 modifier = Modifier.fillMaxWidth(),

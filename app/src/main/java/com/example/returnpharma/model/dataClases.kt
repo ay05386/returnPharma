@@ -6,14 +6,14 @@ data class LoginRequest(
 )
 
 data class Pharmacy(
-    val id: String,
-    val name: String
+    val pharmacyId: String?,
+    val doingBusinessAs: String?
 )
 
 data class PharmacyDetails(
-    val id: String,
-    val name: String,
-    val address: String,
+    val id: String?,
+    val name: String?,
+    val address: String?,
 
 )
 

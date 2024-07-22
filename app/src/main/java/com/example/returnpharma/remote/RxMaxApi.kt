@@ -22,6 +22,8 @@ interface RxMaxApi {
     @GET("pharmacies/management")
     suspend fun listPharmacies(): Response<List<Pharmacy>>
 
+
+
     @GET("pharmacies/{pharmacyId}/full")
     suspend fun getPharmacy(@Path("pharmacyId") pharmacyId: String): Response<PharmacyDetails>
 

@@ -25,11 +25,7 @@ class RxMaxRepository (){
         }
     }
 
-/*
-    suspend fun createReturnRequest(request: CreateReturnRequestRequest): Response<ReturnRequest> {
-        return api.createReturnRequest(request)
-    }
-*/
+
     suspend fun listPharmacies(): Response<List<Pharmacy>> {
         return api.listPharmacies()
     }
