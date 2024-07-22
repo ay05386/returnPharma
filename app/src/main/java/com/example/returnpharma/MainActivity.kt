@@ -41,6 +41,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.collectAsState
 import kotlinx.coroutines.launch
 import androidx.lifecycle.lifecycleScope
+import com.example.returnpharma.Screens.ItemsScreen
 import com.example.returnpharma.networkModule.RetrofitClient
 import com.example.returnpharma.repository.RxMaxRepository
 import com.example.returnpharma.viewModel.CreateReturnRequestViewModel
@@ -71,6 +72,7 @@ class MainActivity : ComponentActivity() {
                         composable(RETURN_REQUESTS) { ReturnRequestsScreen(navController) }
                         composable(CREATE_RETURN_REQUEST) { CreateReturnRequestScreen(navController) }
                         composable(ADD_ITEM) { AddItemScreen(navController) }
+                        composable("items") { ItemsScreen(navController) }
                     }
                 }
             }

@@ -40,7 +40,7 @@ data class Item(
 */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ItemsScreen(navController: NavController, returnRequestId: String) {
+fun ItemsScreen(navController: NavController/*, returnRequestId: String*/) {
     var items by remember { mutableStateOf(listOf(
         Item("1", "12345-678-90", "Aspirin 100mg", "Bayer", 100, 0, "12/31/2025", "LOT123"),
         Item("2", "98765-432-10", "Ibuprofen 200mg", "Advil", 50, 10, "06/30/2026", "LOT456")
@@ -53,7 +53,7 @@ fun ItemsScreen(navController: NavController, returnRequestId: String) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Items for Return Request #$returnRequestId") }
+                title = { Text("Items for Return Request") }
             )
         }
     ) { paddingValues ->

@@ -169,7 +169,7 @@ fun CreateReturnRequestScreen(navController: NavController) {
                 }
                 is CreateRequestState.Success -> {
                     LaunchedEffect(state) {
-                        navController.navigate("addItem/${state.returnRequest.id}")
+                        navController.navigate("addItem")
                     }
                 }
                 is CreateRequestState.Error -> {
